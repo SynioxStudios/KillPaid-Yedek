@@ -1,5 +1,43 @@
---[Kill Paid loaderi ve wl]
+--[[
+    🚀 BYYUSUF - PRIVATE LOADER 🚀
+--]]
+
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
 local config = {
     whitelist = "https://pastebin.com/raw/bj3aQnNh",
     script = "https://raw.githubusercontent.com/SynioxStudios/SynioxKillSC-PA-DHUB-YusufDev-AutoKill/refs/heads/main/Synioxkill.txt"
 }
+
+local function Start()
+    local success, content = pcall(function() return game:HttpGet(config.whitelist) end)
+    
+    if success then
+        local loadSuccess, whitelist = pcall(function() return loadstring(content)() end)
+        
+        if loadSuccess and type(whitelist) == "table" then
+            local isAllowed = false
+            for name, _ in pairs(whitelist) do
+                if name:lower() == LocalPlayer.Name:lower() then
+                    isAllowed = true
+                    break
+                end
+            end
+
+            if isAllowed then
+                -- ✅ Access Granted
+                loadstring(game:HttpGet(config.script))()
+            else
+                -- ❌ Kick Mesajı
+                LocalPlayer:Kick("Not Whitelisted. Where did you get this? Your account is mine now! 💀")
+            end
+        else
+            LocalPlayer:Kick("System Error: Invalid Data")
+        end
+    else
+        LocalPlayer:Kick("Network Error: Connection Failed")
+    end
+end
+
+Start()

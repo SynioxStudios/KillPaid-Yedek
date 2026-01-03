@@ -1,0 +1,5 @@
+--[Kill Paid loaderi ve wl]
+local config = {
+    whitelist = "https://pastebin.com/raw/bj3aQnNh",
+    script = "https://raw.githubusercontent.com/SynioxStudios/SynioxKillSC-PA-DHUB-YusufDev-AutoKill/refs/heads/main/Synioxkill.txt"
+}
